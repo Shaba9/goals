@@ -5,10 +5,6 @@ export default {
     token = t;
   },
 
-  // getToken() {
-  //   return token;
-  // },
-
   signUp(user) {
     return fetch('/signup', {
       method: 'POST',
@@ -64,5 +60,20 @@ export default {
       body: JSON.stringify(goal)
     })
       .then(response => response.json());
+  },
+
+  getStats() {
+    return fetch(`stats/${token}`)
+      .then(response => response.json());
+  },
+
+  markComplete(id, compDate) {
+    return fetch(`goals/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ enDate: compDate })
+    });
   }
 };

@@ -8,15 +8,15 @@ CREATE TABLE IF NOT EXISTS users (
     first_name VARCHAR(256) NOT NULL,
     last_name VARCHAR(256) NOT NULL,
     email VARCHAR(256) NOT NULL,
-    password VARCHAR(256) NOT NULL
+    hash VARCHAR(256) NOT NULL
     );
     
     CREATE TABLE IF NOT EXISTS goals (
       id SERIAL PRIMARY KEY,
       title VARCHAR(256) NOT NULL,
-      start_date VARCHAR(256) NOT NULL,
-      end_date VARCHAR(256) NOT NULL,
-      user_id INTEGER NOT NULL REFERENCES users(id)
+      start_date DATE NOT NULL,
+      end_date DATE NOT NULL,
+      user_id VARCHAR(256) NOT NULL
     );
 
 `)

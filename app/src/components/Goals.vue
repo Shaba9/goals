@@ -6,16 +6,15 @@
         <input v-model="goal.title">
       </label>
       <label>Start Date:
-        <input v-model="goal.stDate">
-      </label>
-      <label>End Date:
-        <input v-model="goal.enDate">
+        <input type="date" v-model="goal.stDate">
       </label>
       <button>Add</button>
     </form>
 
     <ul v-if="goals">
-      <li v-for="g in goals" :key="g.id">{{g.title}}</li>
+      <li v-for="g in goals" :key="g.id">{{g.title}}
+        <button @click="onComplete(g.id)">Mark Completed</button>
+      </li>
     </ul>
   </section>
 
@@ -42,6 +41,15 @@ export default {
         .then(newGoal => {
           this.goals.push(newGoal);
         });
+    },
+    onComplete(id) {
+      const today = new Date();
+      const dd = today.getDate();
+      const mm = today.getMonth() + 1;
+      const yyyy = today.getFullYear();
+      const date = `${yyyy}-${mm}-${dd}`;
+
+      api.markComplete(id, date);
     }
   }
 };
